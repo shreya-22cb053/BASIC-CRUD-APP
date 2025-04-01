@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My CRUD Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to My CRUD App</h1>
+    </header>
+
+    <main>
+        <section id="add-section">
+            <h2>Add New Entry</h2>
+            <form id="add-form" action="/add" method="POST">
+                <input type="text" name="name" placeholder="Enter Name" required>
+                <input type="email" name="email" placeholder="Enter Email" required>
+                <button type="submit">Add Entry</button>
+            </form>
+        </section>
+
+        <section id="view-section">
+            <h2>View All Entries</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in entries %}
+                    <tr>
+                        <td>{{ entry.id }}</td>
+                        <td>{{ entry.name }}</td>
+                        <td>{{ entry.email }}</td>
+                        <td><a href="/delete/{{ entry.id }}" class="delete-btn">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CRUD Application</p>
+    </footer>
+</body>
+</html>
